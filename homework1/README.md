@@ -17,3 +17,12 @@ For problem 2.11
 ## hot-dogs.csv
 
 http://lib.stat.cmu.edu/DASL/Datafiles/Hotdogs.html
+
+## public-colleges.csv
+
+http://www.kiplinger.com/tool/college/T014-S001-kiplinger-s-best-values-in-public-colleges/
+
+## private-colleges.csv
+
+http://www.kiplinger.com/tool/college/T014-S001-kiplinger-s-best-values-in-private-colleges/
+

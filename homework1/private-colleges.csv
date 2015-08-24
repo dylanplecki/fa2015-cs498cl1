@@ -1,0 +1,101 @@
+Rank,Name,State,"Admit-rate","Student-per-faculty","4-yr-grad.-rate","Total-cost-per-yr.","Avg-need--based-aid","Avg-non-need--based-aid","Percent-of-non-need-based-aid","Avg-debt-at-graduation"
+1,Princeton University Princeton,NJ,7,6,88,59165,37183,0,0,5552
+2,Yale University New Haven,CT,7,6,90,60850,44268,0,0,13009
+3,Harvard University Cambridge,MA,6,7,86,59607,41975,0,0,12560
+4,Rice University Houston,TX,17,6,79,54766,34565,11833,25,17856
+5,Duke University Durham,NC,12,7,87,61878,39275,19823,23,18456
+6,Vanderbilt University Nashville,TN,13,8,87,60294,39373,23789,19,20303
+7,California Institute of Technology Pasadena,CA,11,3,82,57603,35474,0,0,15010
+8,Massachusetts Institute of Technology Cambridge,MA,8,8,84,59240,36272,0,0,17891
+9,Stanford University Stanford,CA,6,5,76,59888,40460,0,0†,16640
+10,Dartmouth College Hanover,NH,10,8,87,63293,41376,0,0,15660
+11,University of Pennsylvania Philadelphia,PA,12,6,88,62352,38258,0,0,19798
+12,Cornell University Ithaca,NY,16,9,87,61834,35626,0,0,20577
+13,Brown University Providence,RI,9,8,84,60848,38738,0,0†,24382
+14,Emory University Atlanta,GA,26,8,84,58980,36304,20900,6,26055
+15,University of Chicago Chicago,IL,9,6,88,65386,36549,10205,33,23978
+16,Georgetown University Washington,DC,17,11,88,61968,36663,0,0,24064
+17,Johns Hopkins University Baltimore,MD,17,12,88,63029,34536,32787,2,22808
+18,University of Notre Dame Notre Dame,IN,22,10,90,60511,30689,10014,12,27827
+19,Washington University in St. Louis St. Louis,MO,16,8,88,61804,32685,7636,18,23082
+20,Northwestern University Evanston,IL,14,7,86,63554,35432,2414,7,24334
+21,Tufts University Medford,MA,19,9,87,62077,34853,500,2,24266
+22,Boston College Chestnut Hill,MA,32,13,89,61622,32330,18337,3,21139
+23,Brigham Young University Provo,UT,49,19,31,18322#,4790,3696,43,15769
+24,Clark University Worcester,MA,62,10,76,49330,26375,17456,68,24990
+25,Lehigh University Bethlehem,PA,31,10,73,57770,31860,11877,10,33309
+26,Wake Forest University Winston-Salem,NC,35,11,82,60138,32116,17034,18,35902
+27,University of Southern California Los Angeles,CA,20,9,78,63114,29262,17953,27,28474
+28,University of Rochester Rochester,NY,36,10,77,61978,34357,12030,42,29914
+29,Yeshiva University New York,NY,82,6,65,51204,25388,21793,36,22718
+30,Stevens Institute of Technology Hoboken,NJ,38,10,45,60530,14562,9567,66,14315
+31,Villanova University Villanova,PA,49,12,86,57433,27914,13691,11,35853
+32,Bentley University Waltham,MA,44,14,81,57660,27803,16165,31,31208
+33,Brandeis University Waltham,MA,37,10,86,62025,30948,19923,11,28647
+34,Drake University Des Moines,IA,66,11,66,42616,15965,12341,71,32106
+35,Elon University Elon,NC,54,12,77,42814,13587,6158,29,28327
+36,Gonzaga University Spokane,WA,68,12,71,47189,18575,11727,83,32347
+37,Trinity University San Antonio,TX,64,9,70,49150,23810,15177,83,38540
+38,Santa Clara University Santa Clara,CA,50,12,77,58479,20979,12496,46,29026
+39,Creighton University Omaha,NE,77,11,67,46556,21108,14910,68,35510
+40,The George Washington University Washington,DC,34,13,76,61735,29879,18780,33,31337
+41,Drury University Springfield,MO,73,11,43,32479,14177,8019,82,23750
+42,University of Miami Coral Gables,FL,40,12,71,57964,25669,20240,31,27827
+43,New York University New York,NY,32,10,77,64022,21738,8787,9,30688
+44,Carnegie Mellon University Pittsburgh,PA,25,13,74,63822,27778,8114,12,30798
+45,Whitworth University Spokane,WA,65,11,65,48550,21135,15172,79,24465
+46,Case Western Reserve University Cleveland,OH,42,10,65,57734,27274,21312,58,34998
+47,The University of Tulsa Tulsa,OK,41,11,52,47531,6850,17051,61,34610
+48,Union University Jackson,TN,74,11,51,37870,6000,11964,33,26656
+49,Boston University Boston,MA,37,13,80,61694,28243,17164,10,37694
+50,American University Washington,DC,43,12,76,56815,21080,16394,22,32307
+51,Pepperdine University Malibu,CA,37,13,70,61582,37114,18749,29,30311
+52,Rockhurst University Kansas City,MO,75,11,61,43030,6474,17399,19,16817
+53,Illinois Institute of Technology Chicago,IL,57,12,32,53965,26620,19440,70,31073
+54,Emerson College Boston,MA,48,13,80,53446,17831,15367,13,24451
+55,Marquette University Milwaukee,WI,57,14,57,47938,16877,9930,82,33775
+56,Bradley University Peoria,IL,67,12,55,41464,15016,9362,53,26989
+57,Tulane University New Orleans,LA,26,9,62‡,62061,27550,21055,39,29122
+58,Franciscan University of Steubenville Steubenville,OH,76,15,61,33130,9495,5079,63,33877
+59,Southern Methodist University Dallas,TX,51,11,67,61385,18564,18686,49,29829
+60,Butler University Indianapolis,IN,66,11,56,48590,18366,11584,78,34922
+61,Rensselaer Polytechnic Institute Troy,NY,41,15,65,64198,26633,13794,72,32000
+62,LeTourneau University Longview,TX,41,13,42,37730,14744,11185,19,44584
+63,Marist College Poughkeepsie,NY,37,16,70,47690,14733,7469,46,32914
+64,University of Denver Denver,CO,77,11,67,55197,26611,14563,56,31501
+65,University of Portland Portland,OR,67,14,70,51044,21103,14125,78,27164
+66,Providence College Providence,RI,60,12,83,58323,22756,26213,20,31070
+67,Samford University Birmingham,AL,77,12,49,38060,14062,8949,65,26806
+68,Saint Louis University St. Louis,MO,64,12,62,49846,19740,13207,49,36808
+69,Maryville University of Saint Louis St. Louis,MO,76,12,51,37656,13996,10726,29,29702
+70,University of Evansville Evansville,IN,84,13,53,43856,22261,16649,58,29574
+71,Belmont University Nashville,TN,80,13,56,40590,11066,7393,32,29296
+72,Duquesne University Pittsburgh,PA,74,14,66,44720,16593,9969,72,26119
+73,Oklahoma City University Oklahoma City,OK,70,11,49,41976,16526,18000,52,26088
+74,Mercer University Macon,GA,69,12,45,45658,23898,19302,80,29101
+75,Loyola Marymount University Los Angeles,CA,54,11,67,56997,19128,9840,43,32746
+76,Fordham University New York,NY,47,13,76,62587,22251,13165,41,37607
+77,University of Dayton Dayton,OH,52,14,60,51570,16113,11676,69,37551
+78,John Carroll University University Heights,OH,83,13,65,47300,22526,15513,73,31214
+79,University of San Diego San Diego,CA,49,15,65,56570,24101,13263,26,29115
+80,Webster University St. Louis,MO,57,9,42,36100,13390,6654,13,28518
+81,Baldwin Wallace University Berea,OH,64,13,55,38318,17594,11840,51,31804
+82,Valparaiso University Valparaiso,IN,80,14,58,46140,21958,12723,19,31891
+83,Indiana Wesleyan University Marion,IN,97,14,55,33190,13851,5185,62,29699
+84,Point Loma Nazarene University San Diego,CA,67,14,62,42752,15245,7773,37,36523
+85,Chapman University Orange,CA,45,14,59,59907,15667,17103,48,29439
+86,Clarkson University Potsdam,NY,64,15,63,57386,28010,17546,79,27835
+87,University of St. Thomas St. Paul,MN,86,15,63,46882,17486,14061,23,36955
+88,Syracuse University Syracuse,NY,49,16,69,57722,25670,9720,21,33455
+89,Centenary College of Louisiana Shreveport,LA,66,9,49,46850,20785,14544,88,23760
+90,Xavier University Cincinnati,OH,70,12,67,45980,15334,12844,64,30540
+91,Lipscomb University Nashville,TN,53,12,44,39240,4901,13501,59,28356
+92,Bethel University St. Paul,MN,95,12,62,43540,17486,10405,40,34884
+93,Loyola University Maryland Baltimore,MD,58,12,79,58295,21620,15875,18,34012
+94,Saint Michael's College Colchester,VT,75,12,70,51175,21070,13289,81,33743
+95,Rollins College Winter Park,FL,59,10,61,55238,27745,18541,51,30634
+96,Fairfield University Fairfield,CT,70,11,79,58110,17265,15206,26,28918
+97,Rochester Institute of Technology Rochester,NY,60,13,28,48386,18000,10000,29,26000
+98,Lebanon Valley College Annville,PA,67,12,68,48670,22115,14316,57,33657
+99,St. John Fisher College Rochester,NY,63,13,65,41808,14561,9876,64,31267
+100,DePaul University Chicago,IL,60,16,54,48727,12842,9717,25,26848
