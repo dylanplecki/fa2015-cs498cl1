@@ -16,6 +16,10 @@ individual file on github's web interface, and download each individual
 `csv` file. Alternatively, there's a "Download ZIP" button to the
 right column of this page.
 
+## R-Tutorial
+
+Folder updated Wednesday, September 2nd.
+
 ## Homework 1
 
 Folder updated Monday, August 24th.
