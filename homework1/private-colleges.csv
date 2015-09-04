@@ -7,11 +7,11 @@ Rank,Name,State,"Admit-rate","Student-per-faculty","4-yr-grad.-rate","Total-cost
 6,Vanderbilt University Nashville,TN,13,8,87,60294,39373,23789,19,20303
 7,California Institute of Technology Pasadena,CA,11,3,82,57603,35474,0,0,15010
 8,Massachusetts Institute of Technology Cambridge,MA,8,8,84,59240,36272,0,0,17891
-9,Stanford University Stanford,CA,6,5,76,59888,40460,0,0†,16640
+9,Stanford University Stanford,CA,6,5,76,59888,40460,0,0,16640
 10,Dartmouth College Hanover,NH,10,8,87,63293,41376,0,0,15660
 11,University of Pennsylvania Philadelphia,PA,12,6,88,62352,38258,0,0,19798
 12,Cornell University Ithaca,NY,16,9,87,61834,35626,0,0,20577
-13,Brown University Providence,RI,9,8,84,60848,38738,0,0†,24382
+13,Brown University Providence,RI,9,8,84,60848,38738,0,0,24382
 14,Emory University Atlanta,GA,26,8,84,58980,36304,20900,6,26055
 15,University of Chicago Chicago,IL,9,6,88,65386,36549,10205,33,23978
 16,Georgetown University Washington,DC,17,11,88,61968,36663,0,0,24064
@@ -21,7 +21,7 @@ Rank,Name,State,"Admit-rate","Student-per-faculty","4-yr-grad.-rate","Total-cost
 20,Northwestern University Evanston,IL,14,7,86,63554,35432,2414,7,24334
 21,Tufts University Medford,MA,19,9,87,62077,34853,500,2,24266
 22,Boston College Chestnut Hill,MA,32,13,89,61622,32330,18337,3,21139
-23,Brigham Young University Provo,UT,49,19,31,18322#,4790,3696,43,15769
+23,Brigham Young University Provo,UT,49,19,31,18322,4790,3696,43,15769
 24,Clark University Worcester,MA,62,10,76,49330,26375,17456,68,24990
 25,Lehigh University Bethlehem,PA,31,10,73,57770,31860,11877,10,33309
 26,Wake Forest University Winston-Salem,NC,35,11,82,60138,32116,17034,18,35902
