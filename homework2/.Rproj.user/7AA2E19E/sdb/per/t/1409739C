@@ -1,0 +1,25 @@
+{
+    "contents" : "",
+    "created" : 1442289122138.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "1409739C",
+    "lastKnownWriteTime" : 7011605692497750387,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "j5xfr416h0",
+        "caption" : "smokingnew",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=smokingnew&cache_key=j5xfr416h0",
+        "displayedObservations" : "44",
+        "environment" : "",
+        "object" : "smokingnew",
+        "totalObservations" : "44",
+        "variables" : "6"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "type" : "r_dataframe"
+}
