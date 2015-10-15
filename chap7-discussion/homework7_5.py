@@ -97,7 +97,6 @@ for sim in range(n_simulations):
     # From here, it's a matter of playing the game. Limit ourselves
     # to only 4 turns.
     n_turns = 6
-    spells_played = list()
     lands_on_table = 0
     next_card_ind = 7
     for turn_ind in range(n_turns):
