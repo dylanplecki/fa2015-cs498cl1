@@ -109,5 +109,6 @@ for exp in range(n_experiments):
 probabilities = counts / n_simulations
 n_seconds = round(time() - start)
 print("Probabilities: ".ljust(25) + str(probabilities))
+print("Mean: ").ljust(25) + str(np.mean(probabilities))
 print("Standard deviation: ".ljust(25) + str(np.std(probabilities)))
 print("Number of seconds: ".ljust(25) + str(format(n_seconds)))
