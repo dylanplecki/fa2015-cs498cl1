@@ -47,6 +47,8 @@ def play_round(lands_on_table, next_card_ind):
     # In this selection process, we are interested in picking the
     # card of least cost per round. If lands_on_table == 0, we don't
     # enter the for loop.
+    #
+    # TODO: CHANGE ME FOR YOUR EXPERIMENT!
     for spell_value in range(1, lands_on_table + 1):
         if card_counts[spell_value] > 0:
             card_counts[spell_value] -= 1
@@ -100,6 +102,8 @@ for exp in range(n_experiments):
         # Now we check that we played a card on each of the turns.
         # The boolean converts to an integer, because counts is a
         # (numpy) array of integers.
+        #
+        # TODO: CHANGE ME FOR YOUR EXPERIMENT!
         counts[exp] += int(all(spell_value > 0 for spell_value in spells_played))
 
 probabilities = counts / n_simulations
