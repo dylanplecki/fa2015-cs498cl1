@@ -1,0 +1,109 @@
+\documentclass[10pt, leqno]{exam}
+\usepackage{xspace}
+\usepackage{amsmath}
+\usepackage{enumerate}
+\usepackage{verbatim}
+\usepackage{float}
+\usepackage{mathtools}
+\renewcommand{\labelitemi}{--}
+\renewcommand{\labelitemii}{$\bullet$}
+
+\newcommand{\name}{Henry Lin - halin2}
+\newcommand{\assignment}{Discussion chapter 7}
+\renewcommand{\date}{October 14th}
+\newcommand{\class}{CS 498cl1, Fall 2015}
+
+%\setlength{\parskip}{\baselineskip}%
+
+%\newcommand{\frownie}{=D}
+%\newcommand{\smiley}{=(}
+\pagestyle{headandfoot}
+\firstpageheadrule
+\runningheadrule
+\firstpageheader{\textit{\class}}
+                {\textit{\name}}
+                {\textit{\date}}
+\runningheader	{\textit{\class}}
+                {\textit{\assignment}}
+                {\textit{Page \thepage\ of \numpages}}
+\firstpagefooter{}{}{}
+\runningfooter{}{}{}
+
+% Fonts and typesetting
+\RequirePackage[charter]{mathdesign}
+\usepackage{microtype}
+\setlength\parindent{0pt}
+
+\begin{document}
+
+    \textbf{{\LARGE \assignment}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+    \section*{Magic the Gathering, DAF}
+
+    The rules are as follows. (Please see page 208.)
+    \begin{itemize}
+    \item The game is played with a deck of 60 cards.
+    \item Cards can be in one of 4 places.
+        \begin{itemize}
+        \item The library
+        \item The hand
+        \item The table
+        \item The graveyard (only used spell cards are placed here.
+        See \ref{game:clean}.)
+        \end{itemize}
+
+    \item There are two kinds of cards: Spells and Lands.
+        \begin{itemize}
+        \item Lands have cost 0. At every turn, you could place \textit{at most}
+        one land on the table. (See \ref{game:put}.) When they're placed on the table, they will
+        remain there for the rest of the game.
+        \item Spells have cost $k$ (from 1 to 6). In order for you to use
+        a spell of cost $k$, you must have at least $k$ "untapped" lands on
+        the table. Using a spell card "taps" $k$ lands on the table. They
+        remain tapped for the rest of the turn. If you have enough untapped
+        lands, you could play more spell cards. (See step \ref{game:play}.)
+
+        At the end of the turn, the spell card is placed in the graveyard,
+        and the "tapped" cards are "untapped".\footnote{In his book, David
+        untaps the cards at the beginning of the turn.} (See step \ref{game:clean}.)
+        \end{itemize}
+    \end{itemize}
+
+    Here are the step-by-steps of how this game is played. Assume we play
+    this game for $T$ turns.
+    \newcommand{\landsontable}{\textsc{LandsOnTable}\xspace}
+    \begin{enumerate}[1.]
+    \item Initialize the game with a hand of 7 cards, and 53 cards in the
+    library. The number of each spell card and land card may vary. (See
+    the practice problems.)
+    \item \landsontable = 0
+    \item For $T$ turns:
+        \begin{enumerate}
+        \item \textbf{Draw}. Draw a card from your library, and put it into your hand.
+        \item \textbf{Put}. \label{game:put}
+        If you have a land in your hand, you may put it on the table.
+        \landsontable += 1.
+
+        \item \textbf{Play}. \label{game:play}
+        You can now play your spell cards. You can play
+        as many spells $s_1, s_2, \dots, s_k$ as you want, provided that
+        $$cost(s_1) + cost(s_2) \dots + cost(s_k) \leq \landsontable.$$
+        Using spell $s_i$ taps $cost(s_i)$ lands on the table.
+
+        \textit{Note that in problem 7.5 and 7.6, we use \textbf{at most} one spell
+        per turn. Problem 7.5 and 7.6 vary between picking the cheapest
+        spell card, and picking the most expensive spell card.}
+
+        \item \textbf{Clean up}. \label{game:clean}
+        Put each spell card played in the graveyard.
+        Untap all of the lands played.
+        \end{enumerate}
+    \end{enumerate}
+    Note that we're \textbf{never removing} lands from the table. Therefore,
+    the number of lands on the table only increases as the game goes on.
+    Furthermore, there is no advantage of having lands in your hand; it's only
+    natural that we want to place a land on the table when we have the opportunity.
+    (See step \ref{game:put}.)
+
+\end{document}
