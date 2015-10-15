@@ -48,19 +48,16 @@ def play_round(lands_on_table, next_card_ind):
         card_counts[0] -= 1
 
     # In this selection process, we are interested in picking the
-    # card of least cost per round. If lands_on_table == 0, we don't
-    # enter the for loop.
-    #
-    # TODO: CHANGE ME FOR YOUR EXPERIMENT! (If needed...)
-    for spell_value in range(1, lands_on_table + 1):
+    # most expensive card per round. (Yes, the range loop below is right.)
+    for spell_value in range(lands_on_table, -1, -1):
         if card_counts[spell_value] > 0:
             card_counts[spell_value] -= 1
             return spell_value, lands_on_table
     return -1, lands_on_table
 
-"""Simulates the experiment done in listing 7.2 of the textbook:
+"""Part c of the homework in the textbook.
 
-"Assume you have a deck of
+"Assume you have an MTG-DAF deck of
 
 - 24 lands
 - 10 spells of cost 1
@@ -70,50 +67,57 @@ def play_round(lands_on_table, next_card_ind):
 - 2 spells of cost 5
 - 2 spells of cost 6
 
-What is the probability you will be able to play at least one
-spell on each of the four turns? (Page 210.)"
+It is properly shuffled, and you draw seven cards. At each turn,
+you play a land if it is in your hand, and you always only play the
+most expensive spell in your hand that you area able to play and you
+never play two spells.
 
-The code is on page 216.
+Part c: Extend your program to prepare a 6x6 table of spells. In the
+t, s'th cell of the table, your program should place the probability
+that the first spell you play is played on turn t, and has cost s. Notice
+that many cells easily contain a zero.
 """
 
 start = time()
-n_experiments = 10  # He calls these "simulations"
-n_simulations = 1000  # He calls these "inner simulations"
-counts = np.zeros(n_experiments)
+n_simulations = 10000  # He calls these "inner simulations"
 
-for exp in range(n_experiments):
-    for sim in range(n_simulations):
+# 6 x 6 table of zeros. The first dimension (row) represents the
+# turn, indexed at 0. The second dimension (col) represents the
+# "spell value - 1". (For example, index 5 corresponds to a spell value of 6.)
+counts = np.zeros((6, 6))
 
-        deck = make_deck(lands=24, spell1=10, spell2=10, spell3=10, spell4=2,
-                         spell5=2, spell6=2)
+for sim in range(n_simulations):
 
-        hand = deck[:7]
-        card_counts = get_card_counts(hand)
+    deck = make_deck(lands=24, spell1=10, spell2=10, spell3=10, spell4=2,
+                     spell5=2, spell6=2)
 
-        # From here, it's a matter of playing the game. Limit ourselves
-        # to only 4 turns.
-        n_turns = 4
-        spells_played = list()
-        lands_on_table = 0
-        next_card_ind = 7
-        for turn in range(n_turns):
-            spell_value, lands_on_table \
-                    = play_round(lands_on_table, next_card_ind)
-            next_card_ind += 1
+    hand = deck[:7]
+    card_counts = get_card_counts(hand)
 
-            # TODO: CHANGE ME FOR YOUR EXPERIMENT! (If needed...)
-            spells_played.append(spell_value)
+    # From here, it's a matter of playing the game. Limit ourselves
+    # to only 4 turns.
+    n_turns = 6
+    lands_on_table = 0
+    next_card_ind = 7
+    for turn_ind in range(n_turns):
+        spell_value, lands_on_table \
+            = play_round(lands_on_table, next_card_ind)
+        next_card_ind += 1
 
-        # Now we check that we played a card on each of the turns.
-        # The boolean converts to an integer, because counts is a
-        # (numpy) array of integers.
-        #
-        # TODO: CHANGE ME FOR YOUR EXPERIMENT! (If needed...)
-        counts[exp] += int(all(spell_value > 0 for spell_value in spells_played))
+        # TODO: Figure out whether a spell was played or not.
+        # Record the spell played in the counts table above, in
+        # counts[turn_ind][spell_value - 1]
 
 probabilities = counts / n_simulations
 n_seconds = round(time() - start)
-print("Probabilities: ".ljust(25) + str(probabilities))
-print("Mean: ".ljust(25) + str(round(probabilities.mean(), 4)))
-print("Standard deviation: ".ljust(25) + str(round(probabilities.std(), 4)))
+
+# The three lines below make a string table. You don't have to
+# be able to understand it. (If you do, good job.)
+probabilities = probabilities.tolist()
+probabilities = map(lambda innerlist: '\t'.join(map(str, innerlist)), probabilities)
+probabilities = "\n".join(probabilities)
+
 print("Number of seconds: ".ljust(25) + str(format(n_seconds)))
+print("Probabilities: ")
+print(probabilities)
+
