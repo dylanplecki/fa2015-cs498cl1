@@ -55,9 +55,9 @@ def play_round(lands_on_table, next_card_ind):
             return spell_value, lands_on_table
     return -1, lands_on_table
 
-"""Simulates the experiment done in listing 7.2 of the textbook:
+"""Part c of the homework in the textbook.
 
-"Assume you have a deck of
+"Assume you have an MTG-DAF deck of
 
 - 24 lands
 - 10 spells of cost 1
@@ -67,15 +67,19 @@ def play_round(lands_on_table, next_card_ind):
 - 2 spells of cost 5
 - 2 spells of cost 6
 
-What is the probability you will be able to play at least one
-spell on each of the four turns? (Page 210.)"
+It is properly shuffled, and you draw seven cards. At each turn,
+you play a land if it is in your hand, and you always only play the
+most expensive spell in your hand that you area able to play and you
+never play two spells.
 
-The code is on page 216.
+Part c: Extend your program to prepare a 6x6 table of spells. In the
+t, s'th cell of the table, your program should place the probability
+that the first spell you play is played on turn t, and has cost s. Notice
+that many cells easily contain a zero.
 """
 
 start = time()
-n_experiments = 10  # He calls these "simulations"
-n_simulations = 1000  # He calls these "inner simulations"
+n_simulations = 10000  # He calls these "inner simulations"
 
 # 6 x 6 table of zeros. The first dimension (row) represents the
 # turn, indexed at 0. The second dimension (col) represents the
@@ -108,8 +112,14 @@ for sim in range(n_simulations):
 
 probabilities = counts / n_simulations
 n_seconds = round(time() - start)
-print("Probabilities: ".ljust(25) + str(probabilities))
-print("Mean: ".ljust(25) + str(round(probabilities.mean(), 4)))
-print("Standard deviation: ".ljust(25) + str(round(probabilities.std(), 4)))
+
+# The three lines below make a string table. You don't have to
+# be able to understand it. (If you do, good job.)
+probabilities = probabilities.tolist()
+probabilities = map(lambda innerlist: '\t'.join(map(str, innerlist)), probabilities)
+probabilities = "\n".join(probabilities)
+
 print("Number of seconds: ".ljust(25) + str(format(n_seconds)))
+print("Probabilities: ")
+print(probabilities)
 
