@@ -49,7 +49,7 @@ def play_round(lands_on_table, next_card_ind):
 
     # In this selection process, we are interested in picking the
     # most expensive card per round. (Yes, the range loop below is right.)
-    for spell_value in range(lands_on_table, -1, -1):
+    for spell_value in range(lands_on_table, 0, -1):
         if card_counts[spell_value] > 0:
             card_counts[spell_value] -= 1
             return spell_value, lands_on_table
