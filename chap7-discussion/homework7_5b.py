@@ -71,8 +71,8 @@ you play a land if it is in your hand, and you always only play the
 most expensive spell in your hand that you area able to play and you
 never play two spells.
 
-Part a: Write a program to estimate the probability that the first time
-you play a spell is on turn 4."
+Part b: Write a program to estimate the probability that the first
+spall you play has cost 4."
 """
 
 start = time()
