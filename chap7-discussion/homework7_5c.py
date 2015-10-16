@@ -107,6 +107,10 @@ for sim in range(n_simulations):
         # TODO: Figure out whether a spell was played or not.
         # Record the spell played in the counts table above, in
         # counts[turn_ind][spell_value - 1]
+        if spell_value > 0:
+            spell_ind = spell_value - 1
+            counts[turn_ind][spell_ind] += 1
+            break
 
 probabilities = counts / n_simulations
 n_seconds = round(time() - start)

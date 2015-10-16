@@ -97,8 +97,7 @@ for exp in range(n_experiments):
         lands_on_table = 0
         next_card_ind = 7
         for turn in range(n_turns):
-            spell_value, lands_on_table \
-                    = play_round(lands_on_table, next_card_ind)
+            spell_value, lands_on_table = play_round(lands_on_table, next_card_ind)
             next_card_ind += 1
 
             # TODO: CHANGE ME FOR YOUR EXPERIMENT! (If needed...)
@@ -109,7 +108,7 @@ for exp in range(n_experiments):
         # (numpy) array of integers.
         #
         # TODO: CHANGE ME FOR YOUR EXPERIMENT! (If needed...)
-        counts[exp] += int(all(spell_value > 0 for spell_value in spells_played))
+        counts[exp] += all(spell_value > 0 for spell_value in spells_played)
 
 probabilities = counts / n_simulations
 n_seconds = round(time() - start)

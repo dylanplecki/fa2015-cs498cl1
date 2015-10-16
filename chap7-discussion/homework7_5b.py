@@ -95,8 +95,7 @@ for exp in range(n_experiments):
         lands_on_table = 0
         next_card_ind = 7
         for turn in range(n_turns):
-            spell_value, lands_on_table \
-                    = play_round(lands_on_table, next_card_ind)
+            spell_value, lands_on_table = play_round(lands_on_table, next_card_ind)
             next_card_ind += 1
 
             # TODO: CHANGE ME FOR YOUR EXPERIMENT! (If needed...)

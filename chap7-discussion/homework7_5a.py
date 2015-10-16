@@ -52,7 +52,11 @@ def play_round(lands_on_table, next_card_ind):
     # enter the for loop.
     #
     # TODO: CHANGE ME FOR YOUR EXPERIMENT! (If needed...)
-    pass
+    for spell_value in range(1, lands_on_table + 1):
+        if card_counts[spell_value] > 0:
+            card_counts[spell_value] -= 1
+            return spell_value, lands_on_table
+    return -1, lands_on_table
 
 """For problem 7.5 in the textbook.
 
@@ -94,14 +98,16 @@ for exp in range(n_experiments):
         n_turns = 4
         lands_on_table = 0
         next_card_ind = 7
+        spells_played = list()
         for turn in range(n_turns):
             spell_value, lands_on_table \
                     = play_round(lands_on_table, next_card_ind)
             next_card_ind += 1
 
             # TODO: CHANGE ME FOR YOUR EXPERIMENT! (If needed...)
+            # What do I do with the spell value?
             # You might want to use the spell_value that you played, above.
-            pass
+            spells_played.append(spell_value)
 
         # Now we check that we played a card on each of the turns.
         # The boolean converts to an integer, because counts is a
@@ -110,7 +116,9 @@ for exp in range(n_experiments):
         # TODO: CHANGE ME FOR YOUR EXPERIMENT! (If needed...)
         # You might want to modify the count variable. Keep a count of
         # the number of successes in it.
-        pass
+        # Need to increment counts.
+        counts[exp] += all(spell_value == -1 for spell_value in spells_played[:3]) \
+                and spells_played[len(spells_played)-1] > 0
 
 probabilities = counts / n_simulations
 n_seconds = round(time() - start)
