@@ -1,0 +1,2 @@
+all:
+	pdflatex rules.tex
