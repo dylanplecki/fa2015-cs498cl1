@@ -1,0 +1,17 @@
+{
+    "contents" : "\nseeds.data<-read.csv('seeds.csv', header=TRUE)\nseeds.data.covm<-cov(seeds.data)\nseeds.data.e<-eigen(seeds.data.covm)\nseeds.data.ev<-sort(seeds.data.e$values, decreasing = TRUE)\n\nplot(seeds.data.ev, type=\"n\", main=\"10.6.B: Eigen Values of Seed List\",\n     ylab = \"Eigen Value\", xlab = \"Number of Eigen Value (sorted)\")\nlines(seeds.data.ev, type=\"o\")\n",
+    "created" : 1447265774370.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "4106527389",
+    "id" : "32EAB151",
+    "lastKnownWriteTime" : 1447265926,
+    "path" : "~/Projects/fa2015-cs498cl1/homework9/10_6_b.r",
+    "project_path" : "10_6_b.r",
+    "properties" : {
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

@@ -1,0 +1,17 @@
+{
+    "contents" : "\nseeds.data<-read.csv('seeds.csv', header=TRUE)\nseeds.data.pca <- prcomp(seeds.data, scale. = TRUE, center = TRUE)\n\nlibrary(ggbiplot)\ng <- ggbiplot(seeds.data.pca, obs.scale = 1, var.scale = 1, \n              ellipse = TRUE, circle = TRUE,\n              groups = factor(seeds.data$Class, labels = c(\"Group 1\", \"Group 2\", \"Group 3\")))\ng <- g + scale_color_discrete(name = '')\ng <- g + theme(legend.direction = 'horizontal', \n               legend.position = 'top')\nprint(g)\n",
+    "created" : 1447265262297.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "125305338",
+    "id" : "729EFCA9",
+    "lastKnownWriteTime" : 1447265606,
+    "path" : "~/Projects/fa2015-cs498cl1/homework9/10_6_a.r",
+    "project_path" : "10_6_a.r",
+    "properties" : {
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "type" : "r_source"
+}
