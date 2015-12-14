@@ -3,6 +3,7 @@ import pickle
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+from random import randint
 from sklearn.cluster import KMeans
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.cross_validation import train_test_split
@@ -110,8 +111,8 @@ def calculate_k_means(hmp_dataset):
 
 def main():
     outputdir = os.path.join(
-            HmpAnalyzeSettings.OutputDir,
-            "block%d_vocab%d" % (HmpAnalyzeSettings.BlockGroupingSize, HmpAnalyzeSettings.VocabularySize)
+        HmpAnalyzeSettings.OutputDir,
+        "block%d_vocab%d" % (HmpAnalyzeSettings.BlockGroupingSize, HmpAnalyzeSettings.VocabularySize)
     )
 
     if not os.path.exists(HmpAnalyzeSettings.CacheDir):
@@ -121,13 +122,9 @@ def main():
 
     if HmpAnalyzeSettings.NoCache:
         hmp = HmpDataset()
-        k_means = calculate_k_means(hmp)
     else:
         hmptempfile = os.path.join(HmpAnalyzeSettings.CacheDir,
                                    "hmp_dataset.b%d.pkl" % HmpAnalyzeSettings.BlockGroupingSize)
-        kmeanstempfile = os.path.join(HmpAnalyzeSettings.CacheDir,
-                                      "hmp_k_means.v%d.pkl" % HmpAnalyzeSettings.VocabularySize)
-
         if not os.path.isfile(hmptempfile):
             hmp = HmpDataset()
             fh = open(hmptempfile, "wb")
@@ -138,19 +135,38 @@ def main():
             fh = open(hmptempfile, "rb")
             hmp = pickle.load(fh)
             fh.close()
-        if not os.path.isfile(kmeanstempfile):
-            k_means = calculate_k_means(hmp)
-            fh = open(kmeanstempfile, "wb")
-            fh.truncate()
-            pickle.dump(k_means, fh)
-            fh.close()
-        else:
-            fh = open(kmeanstempfile, "rb")
-            k_means = pickle.load(fh)
-            fh.close()
 
+    # Calculate k-means for dataset
+    k_means = calculate_k_means(hmp)
+
+    # Collection lists for classification
     x_set = []
     y_set = []
+
+    # Initialize signal plots
+    signal_fig = plt.figure()
+    signal_x_fig_ax = signal_fig.add_subplot(311)
+    signal_y_fig_ax = signal_fig.add_subplot(312)
+    signal_z_fig_ax = signal_fig.add_subplot(313)
+    signal_x_fig_ax.set_xlabel("Time")
+    signal_y_fig_ax.set_xlabel("Time")
+    signal_z_fig_ax.set_xlabel("Time")
+    signal_x_fig_ax.set_ylabel("$X$ Acceleration")
+    signal_y_fig_ax.set_ylabel("$Y$ Acceleration")
+    signal_z_fig_ax.set_ylabel("$Z$ Acceleration")
+    signal_x_fig_ax.set_title("$X$ Acceleration Cluster Signals")
+    signal_y_fig_ax.set_title("$Y$ Acceleration Cluster Signals")
+    signal_z_fig_ax.set_title("$Z$ Acceleration Cluster Signals")
+
+    # Plot cluster centers as signals
+    for cluster in k_means.cluster_centers_:
+        signal_x_fig_ax.plot(cluster[0::3])
+        signal_y_fig_ax.plot(cluster[1::3])
+        signal_z_fig_ax.plot(cluster[2::3])
+
+    # Save signal plot
+    signal_fig.tight_layout()
+    signal_fig.savefig(os.path.join(outputdir, "signal_plot.png"), bbox_inches='tight')
 
     # Predict clusters from input data and plot
     for hmp_name, n, uniquelist in hmp.inputlist:
@@ -169,43 +185,46 @@ def main():
             x_set.append(X / len(kmp))
             y_set.append(hmp_name)
 
+        # Run predication on all HMP data
+        k_means_predict = k_means.predict(cum_zmatrix)
+
+        # Plot cluster histogram
+        kmpn_fig = plt.figure()
+        kmpn_fig_ax = kmpn_fig.add_subplot(111)
+        kmpn_fig_ax.hist(k_means_predict, normed=1,
+                         range=(0, HmpAnalyzeSettings.VocabularySize), bins=HmpAnalyzeSettings.VocabularySize)
+        kmpn_fig_ax.set_title("%s K-Means Histogram" % hmp_name)
+        kmpn_fig_ax.set_xlabel("Cluster Index")
+        kmpn_fig_ax.set_ylabel("Normalized Frequency")
         kmpn_fig_file = os.path.join(outputdir, "%s_k_means_hist.png" % hmp_name)
-        if HmpAnalyzeSettings.NoCache or not os.path.isfile(kmpn_fig_file):
-
-            # Run predication on all HMP data
-            k_means_predict = k_means.predict(cum_zmatrix)
-
-            # Plot cluster histogram
-            kmpn_fig = plt.figure()
-            kmpn_fig_ax = kmpn_fig.add_subplot(111)
-            kmpn_fig_ax.hist(k_means_predict, normed=1,
-                             range=(0, HmpAnalyzeSettings.VocabularySize), bins=HmpAnalyzeSettings.VocabularySize)
-            kmpn_fig_ax.set_title("%s K-Means Histogram" % hmp_name)
-            kmpn_fig_ax.set_xlabel("Cluster Index")
-            kmpn_fig_ax.set_ylabel("Normalized Frequency")
-            kmpn_fig.savefig(kmpn_fig_file, bbox_inches='tight')
+        kmpn_fig.savefig(kmpn_fig_file, bbox_inches='tight')
 
     # Generate train/test split for classification
     X_train, X_test, y_train, y_test = train_test_split(x_set, y_set, test_size=HmpAnalyzeSettings.ClassifierTestSize,
-                                                        random_state=888)
+                                                        random_state=randint(90, 1000))
 
     # Instantiates an SVM and do some predictions on it
     clf = RandomForestClassifier()
     clf.fit(X_train, y_train)
     predictions = clf.predict(X_test)
 
+    # Generate results
     score = accuracy_score(y_test, predictions)
-    print("Accuracy score of the SVM: ", score)
     cm = confusion_matrix(y_test, predictions)
-    print("Confusion matrix: \n", cm)
+
+    # Save results
+    file = open(os.path.join(outputdir, "results.txt"), "w")
+    file.write("Accuracy score of the SVM: %f\n" % score)
+    file.write("Confusion matrix (text-form):\n%s\n" % str(cm))
+    file.close()
 
     # Plot confusion matrix and save to file
     cm_fig = plt.figure()
     cm_fig_ax = cm_fig.add_subplot(111)
     cm_fig_ax.imshow(cm, interpolation='nearest', cmap=plt.cm.Blues)
     cm_fig_ax.set_title("HMP Confusion Matrix")
-    cm_fig_ax.set_ylabel('True label')
-    cm_fig_ax.set_xlabel('Predicted label')
+    cm_fig_ax.set_ylabel('True Label')
+    cm_fig_ax.set_xlabel('Predicted Label')
     cm_fig.colorbar(cm_fig_ax.matshow(cm))
     cm_fig.tight_layout()
     cm_fig.savefig(os.path.join(outputdir, "confusion_matrix.png"), bbox_inches='tight')
