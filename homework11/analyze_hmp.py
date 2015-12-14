@@ -196,8 +196,19 @@ def main():
 
     score = accuracy_score(y_test, predictions)
     print("Accuracy score of the SVM: ", score)
-    matrix = confusion_matrix(y_test, predictions)
-    print("Confusion matrix: \n", matrix)
+    cm = confusion_matrix(y_test, predictions)
+    print("Confusion matrix: \n", cm)
+
+    # Plot confusion matrix and save to file
+    cm_fig = plt.figure()
+    cm_fig_ax = cm_fig.add_subplot(111)
+    cm_fig_ax.imshow(cm, interpolation='nearest', cmap=plt.cm.Blues)
+    cm_fig_ax.set_title("HMP Confusion Matrix")
+    cm_fig_ax.set_ylabel('True label')
+    cm_fig_ax.set_xlabel('Predicted label')
+    cm_fig.colorbar(cm_fig_ax.matshow(cm))
+    cm_fig.tight_layout()
+    cm_fig.savefig(os.path.join(outputdir, "confusion_matrix.png"), bbox_inches='tight')
 
 
 # Run main from script start
