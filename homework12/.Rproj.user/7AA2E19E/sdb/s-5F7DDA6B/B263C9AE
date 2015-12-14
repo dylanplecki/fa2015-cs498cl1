@@ -1,0 +1,18 @@
+{
+    "contents" : "kw<-read.table('kittiwak.txt', header=TRUE)\n\nkdat1<-data.frame(Area=kw$Area, Population=kw$Population)\nkdat2<-data.frame(Area=kw$Area, Population=log(kw$Population))\nkdat3<-data.frame(Area=log(kw$Area), Population=kw$Population)\nkdat4<-data.frame(Area=log(kw$Area), Population=log(kw$Population))\n\nkdat1.lm<-lm(Population ~ Area, data=kdat1)\nkdat2.lm<-lm(Population ~ Area, data=kdat2)\nkdat3.lm<-lm(Population ~ Area, data=kdat3)\nkdat4.lm<-lm(Population ~ Area, data=kdat4)\n\npar(mfrow=c(2,2))\n\nplot(kdat1, col='blue', xlab=NA, ylab=NA)\nabline(kdat1.lm, col='red', lwd=1.5)\ntitle(bquote(bold('Kittiwake Colonies')~'(R'^2~'='~.(summary(kdat1.lm)$r.squared)*')'),\n      xlab=expression(paste(\"Area (km\"^\"2\"~\")\")), ylab=\"Population\")\nlegend('bottomright', c(\"Actual\", \"Predicted\"),\n       lwd=c(1, 1.5),col=c('blue','red'),\n       lty=c(NA, 1), pch=c(1, NA))\n\nplot(kdat2, col='blue', xlab=NA, ylab=NA)\nabline(kdat2.lm, col='red', lwd=1.5, untf=TRUE)\ntitle(bquote(bold('Kittiwake Colonies')~'(R'^2~'='~.(summary(kdat2.lm)$r.squared)*')'),\n      xlab=expression(paste(\"Area (km\"^\"2\"~\")\")), ylab=\"log(Population)\")\nlegend('bottomright', c(\"Actual\", \"Predicted\"),\n       lwd=c(1, 1.5),col=c('blue','red'),\n       lty=c(NA, 1), pch=c(1, NA))\n\nplot(kdat3, col='blue', xlab=NA, ylab=NA)\nabline(kdat3.lm, col='red', lwd=1.5)\ntitle(bquote(bold('Kittiwake Colonies')~'(R'^2~'='~.(summary(kdat3.lm)$r.squared)*')'),\n      xlab=expression(\"log(Area) (km\"^\"2\"~\")\"), ylab=\"Population\")\nlegend('topleft', c(\"Actual\", \"Predicted\"),\n       lwd=c(1, 1.5),col=c('blue','red'),\n       lty=c(NA, 1), pch=c(1, NA))\n\nplot(kdat4, col='blue', xlab=NA, ylab=NA)\nabline(kdat4.lm, col='red', lwd=1.5)\ntitle(bquote(bold('Kittiwake Colonies')~'(R'^2~'='~.(summary(kdat4.lm)$r.squared)*')'),\n      xlab=expression(paste(\"log(Area) (km\"^\"2\"~\")\")), ylab=\"log(Population)\")\nlegend('topleft', c(\"Actual\", \"Predicted\"),\n       lwd=c(1, 1.5),col=c('blue','red'),\n       lty=c(NA, 1), pch=c(1, NA))\n",
+    "created" : 1450120261353.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "828587041",
+    "id" : "B263C9AE",
+    "lastKnownWriteTime" : 1450126009,
+    "path" : "~/Projects/fa2015-cs498cl1/homework12/linear_regression.R",
+    "project_path" : "linear_regression.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "type" : "r_source"
+}
