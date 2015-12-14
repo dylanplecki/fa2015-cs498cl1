@@ -11,10 +11,15 @@ from sklearn.metrics import accuracy_score, confusion_matrix
 
 
 class HmpAnalyzeSettings:
-    # Analyze Settings
-    BlockGroupingSize = 32
-    VocabularySize = 10
+    # Single-Analyze Settings
+    BlockGroupingSize = 64
+    VocabularySize = 50
     ClassifierTestSize = 0.25
+
+    # Multi-Analyze Settings
+    MultiAnalyze = True
+    TestBlockSizes = [16, 32, 64]
+    TestVocabularySizes = [10, 20, 30, 40, 50]
 
     # Data Settings
     NoCache = False
@@ -93,8 +98,8 @@ def calculate_k_means(hmp_dataset):
     km = KMeans(n_jobs=1, n_clusters=HmpAnalyzeSettings.VocabularySize)
 
     cum_zmatrix = np.empty(
-        (len(hmp_dataset.segdataframe), 3 * HmpAnalyzeSettings.BlockGroupingSize),
-        dtype=np.float64
+            (len(hmp_dataset.segdataframe), 3 * HmpAnalyzeSettings.BlockGroupingSize),
+            dtype=np.float64
     )
 
     i = 0
@@ -111,8 +116,8 @@ def calculate_k_means(hmp_dataset):
 
 def main():
     outputdir = os.path.join(
-        HmpAnalyzeSettings.OutputDir,
-        "block%d_vocab%d" % (HmpAnalyzeSettings.BlockGroupingSize, HmpAnalyzeSettings.VocabularySize)
+            HmpAnalyzeSettings.OutputDir,
+            "block%d_vocab%d" % (HmpAnalyzeSettings.BlockGroupingSize, HmpAnalyzeSettings.VocabularySize)
     )
 
     if not os.path.exists(HmpAnalyzeSettings.CacheDir):
@@ -154,9 +159,12 @@ def main():
     signal_x_fig_ax.set_ylabel("$X$ Acceleration")
     signal_y_fig_ax.set_ylabel("$Y$ Acceleration")
     signal_z_fig_ax.set_ylabel("$Z$ Acceleration")
-    signal_x_fig_ax.set_title("$X$ Acceleration Cluster Signals")
-    signal_y_fig_ax.set_title("$Y$ Acceleration Cluster Signals")
-    signal_z_fig_ax.set_title("$Z$ Acceleration Cluster Signals")
+    signal_x_fig_ax.set_title("$X$ Acceleration Cluster Signals for BlockSize=%d, Clusters=%d" %
+                              (HmpAnalyzeSettings.BlockGroupingSize, HmpAnalyzeSettings.VocabularySize))
+    signal_y_fig_ax.set_title("$Y$ Acceleration Cluster Signals for BlockSize=%d, Clusters=%d" %
+                              (HmpAnalyzeSettings.BlockGroupingSize, HmpAnalyzeSettings.VocabularySize))
+    signal_z_fig_ax.set_title("$Z$ Acceleration Cluster Signals for BlockSize=%d, Clusters=%d" %
+                              (HmpAnalyzeSettings.BlockGroupingSize, HmpAnalyzeSettings.VocabularySize))
 
     # Plot cluster centers as signals
     for cluster in k_means.cluster_centers_:
@@ -169,6 +177,8 @@ def main():
     signal_fig.savefig(os.path.join(outputdir, "signal_plot.png"), bbox_inches='tight')
 
     # Predict clusters from input data and plot
+    p = 0
+    kmpn_fig = plt.figure()
     for hmp_name, n, uniquelist in hmp.inputlist:
         cum_zmatrix = np.empty((n, 3 * HmpAnalyzeSettings.BlockGroupingSize), dtype=np.float64)
 
@@ -189,15 +199,20 @@ def main():
         k_means_predict = k_means.predict(cum_zmatrix)
 
         # Plot cluster histogram
-        kmpn_fig = plt.figure()
-        kmpn_fig_ax = kmpn_fig.add_subplot(111)
+        kmpn_fig_ax = kmpn_fig.add_subplot(4, 4, p + 1)
         kmpn_fig_ax.hist(k_means_predict, normed=1,
                          range=(0, HmpAnalyzeSettings.VocabularySize), bins=HmpAnalyzeSettings.VocabularySize)
         kmpn_fig_ax.set_title("%s K-Means Histogram" % hmp_name)
         kmpn_fig_ax.set_xlabel("Cluster Index")
         kmpn_fig_ax.set_ylabel("Normalized Frequency")
-        kmpn_fig_file = os.path.join(outputdir, "%s_k_means_hist.png" % hmp_name)
-        kmpn_fig.savefig(kmpn_fig_file, bbox_inches='tight')
+
+        p += 1
+
+    # Save k-means histograms
+    kmpn_fig.suptitle("K-Means Histograms for BlockSize=%d, Clusters=%d" %
+                      (HmpAnalyzeSettings.BlockGroupingSize, HmpAnalyzeSettings.VocabularySize))
+    kmpn_fig.set_size_inches(24, 24)
+    kmpn_fig.savefig(os.path.join(outputdir, "k_means_histograms.png"), bbox_inches='tight')
 
     # Generate train/test split for classification
     X_train, X_test, y_train, y_test = train_test_split(x_set, y_set, test_size=HmpAnalyzeSettings.ClassifierTestSize,
@@ -214,6 +229,8 @@ def main():
 
     # Save results
     file = open(os.path.join(outputdir, "results.txt"), "w")
+    file.write("SVM Results for BlockSize=%d, Clusters=%d\n\n" %
+               (HmpAnalyzeSettings.BlockGroupingSize, HmpAnalyzeSettings.VocabularySize))
     file.write("Accuracy score of the SVM: %f\n" % score)
     file.write("Confusion matrix (text-form):\n%s\n" % str(cm))
     file.close()
@@ -222,7 +239,8 @@ def main():
     cm_fig = plt.figure()
     cm_fig_ax = cm_fig.add_subplot(111)
     cm_fig_ax.imshow(cm, interpolation='nearest', cmap=plt.cm.Blues)
-    cm_fig_ax.set_title("HMP Confusion Matrix")
+    cm_fig_ax.set_title("HMP Confusion Matrix for BlockSize=%d, Clusters=%d" %
+                        (HmpAnalyzeSettings.BlockGroupingSize, HmpAnalyzeSettings.VocabularySize))
     cm_fig_ax.set_ylabel('True Label')
     cm_fig_ax.set_xlabel('Predicted Label')
     cm_fig.colorbar(cm_fig_ax.matshow(cm))
@@ -231,4 +249,11 @@ def main():
 
 
 # Run main from script start
-main()
+if HmpAnalyzeSettings.MultiAnalyze:
+    for blocksize in HmpAnalyzeSettings.TestBlockSizes:
+        for clustersize in HmpAnalyzeSettings.TestVocabularySizes:
+            HmpAnalyzeSettings.BlockGroupingSize = blocksize
+            HmpAnalyzeSettings.VocabularySize = clustersize
+            main()
+else:
+    main()
